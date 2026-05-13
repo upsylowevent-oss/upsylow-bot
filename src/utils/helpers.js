@@ -68,15 +68,19 @@ async function getOrCreateVoiceChannel(guild, name, parent = null, overwrites = 
 }
 
 function embed(title, description) {
+  const safeTitle = title && title.trim()
+    ? title
+    : 'UPSYLOW';
+
+  const safeDescription =
+    String(description ?? '').trim()
+      || 'Aucune information fournie.';
+
   return new EmbedBuilder()
-    .setTitle(title)
-    .setDescription(
-  description && description.trim()
-    ? description
-    : 'Aucune information fournie.'
-)
+    .setTitle(safeTitle)
+    .setDescription(safeDescription)
     .setColor(config.themeColor)
-    .setFooter({ text: "UPSYLOW • Underground mais carré" });
+    .setFooter({ text: "UPSYLOW • Underground" });
 }
 
 async function sendOrUpdatePanel(channel, marker, payload) {
