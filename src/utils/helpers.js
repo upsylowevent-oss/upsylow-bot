@@ -70,7 +70,11 @@ async function getOrCreateVoiceChannel(guild, name, parent = null, overwrites = 
 function embed(title, description) {
   return new EmbedBuilder()
     .setTitle(title)
-    .setDescription(description)
+    .setDescription(
+  description && description.trim()
+    ? description
+    : 'Aucune information fournie.'
+)
     .setColor(config.themeColor)
     .setFooter({ text: "UPSYLOW • Underground mais carré" });
 }
